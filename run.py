@@ -1,5 +1,6 @@
-from services.apps.main_app import app
+from services.app_manager import create_app
 
+app = create_app()
 
 if __name__ == '__main__':
     app.run(

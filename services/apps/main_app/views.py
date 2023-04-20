@@ -1,6 +1,8 @@
-from services.apps.main_app import app
+from flask import Blueprint, render_template
+
+index = Blueprint('index', __name__, url_prefix='/')
 
 
-@app.route('/')
-def index():
-    return 'Test page'
+@index.route('/')
+def main_page():
+    return render_template('main_app/index.html')
