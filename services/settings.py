@@ -12,13 +12,15 @@ class Config:
 
     DEBUG = os.getenv('DEBUG')
 
-    # ADMINS = frozenset(os.getenv('ADMINS'))
+    ADMINS = frozenset(os.getenv('ADMINS'))
     SECRET_KEY = os.getenv('SECRET_KEY')
 
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(_basedir, 'db.sqlite')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_MIGRATE_REPO = os.path.join(_basedir, 'db_migrations')
     DATABASE_CONNECT_OPTIONS = {}
+
+    WTF_CSRF_ENABLED = True
 
     # THREADS_PER_PAGE = 8
 
