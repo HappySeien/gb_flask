@@ -1,3 +1,5 @@
+{% from "macros.html" import nav_link with context %}
+
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
     <a class="navbar-brand" href="{{ url_for('index.main_page') }}">GB Flask</a>
@@ -6,26 +8,14 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" href="{{ url_for('index.main_page') }}">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="{{ url_for('user.user_list') }}">Users</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="{{ url_for('article.article_list') }}">Articles</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('report.report_list') }}">Reports</a>
-        </li>
+        {{ nav_link('index.main_page', 'Home') }}
+        {{ nav_link('user.user_list', 'Users') }}
+        {{ nav_link('article.article_list', 'Articles') }}
+        {{ nav_link('report.report_list', 'Reports') }}
         {% if current_user.is_authenticated %}
-          <li class="nav-item">
-            <a class="nav-link active" href="{{ url_for('auth.logout') }}">Logout</a>
-          </li>
+          {{ nav_link('auth.logout', 'Logout') }}
         {% else %}
-          <li class="nav-item">
-            <a class="nav-link active" href="{{ url_for('auth.login') }}">Login</a>
-          </li>
+          {{ nav_link('auth.login', 'Login') }}
         {% endif %}
       </ul>
     </div>
