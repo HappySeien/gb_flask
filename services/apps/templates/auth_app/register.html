@@ -2,7 +2,7 @@
 {% from "macros.html" import render_field with context %}
 
 {% block title %}
-    Login page
+    Register page
 {% endblock %}
 
 {% block content %}
@@ -14,17 +14,17 @@
       </div>
     {% endif %}
   {% endwith %}
-  
-<h3>
-  Login here or 
-  <a href="{{ url_for('auth.register') }}">Register</a>
-</h3>
 
+<h3>
+    Register here or 
+  <a href="{{ url_for('auth.login') }}">Login</a>
+</h3>
+  
 <form method="POST">
     {# csrf protection #}
     {{ form.csrf_token() }}
     {# show inputs #}
-    {% for field in ['username', 'password'] %}
+    {% for field in ['username', 'email', 'first_name', 'last_name', 'password', 'confirm'] %}
     {{ render_field(form[field]) }}
     {% endfor %}
     {# submit #}

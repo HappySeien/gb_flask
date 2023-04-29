@@ -3,5 +3,13 @@
 {% block title %} Main page {% endblock %}
 
 {% block content %}
-Test main page
+<h2>
+    Hello
+    {% if current_user.is_authenticated %}
+    {{ current_user.username }}
+    {% else %}
+    anon
+    {% endif %}
+    this is test main page
+</h2>
 {% endblock %}

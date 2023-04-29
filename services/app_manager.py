@@ -3,7 +3,7 @@ from flask_migrate import Migrate
 
 from .settings import Config
 from .apps import VIEWS
-from .extension import db, login_manager
+from .extension import db, login_manager, flask_bcrypt_
 from .models import User
 from .commands import custom_cli
 
@@ -20,6 +20,8 @@ def create_app() -> Flask:
 def register_extensions(app):
     db.init_app(app)
     Migrate(app, db, compare_type=True)
+
+    flask_bcrypt_.init_app(app)
 
     login_manager.login_view = 'auth.login'
     login_manager.init_app(app)

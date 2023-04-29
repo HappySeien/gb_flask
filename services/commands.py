@@ -1,5 +1,6 @@
 from werkzeug.security import generate_password_hash
 from flask.cli import AppGroup
+import os
 
 custom_cli= AppGroup('custom')
 
@@ -15,9 +16,17 @@ def init_db():
 def create_users():
     from services.extension import db
     from services.models import User
-    test_user = User(email='test@email.com', password=generate_password_hash('1234'))
-    test_admin = User(email='test_admin@email.com', password=generate_password_hash('admin'), is_staff=True)
+    test_user = User(username='test_user', email='test@email.com', password=generate_password_hash('1234'))
     db.session.add(test_user)
-    db.session.add(test_admin)
     db.session.commit()
     print('done')
+
+@custom_cli.command('create-admin', help='create admin')
+def create_admin():
+    from services.extension import db
+    from services.models import User
+    admin = User(username='admin', email='test_admin@email.com', is_staff=True)
+    admin.password = os.environ.get('ADMIN_PASSWORD') or 'admin'
+    db.session.add(admin)
+    db.session.commit()
+    print('created admin:', admin)
