@@ -9,29 +9,6 @@ from services.forms import CreateArticleForm
 
 article = Blueprint('article', __name__, url_prefix='/article')
 
-ARTICLES = {
-    1: {
-        'title': 'Time for time',
-        'text': 'many texts',
-        'author': 2
-    },
-    2: {
-        'title': 'Time for relax',
-        'text': 'more texts',
-        'author': 2
-    },
-    3: {
-        'title': 'Cry In floor',
-        'text': 'not many texts',
-        'author': 1
-    },
-    4: {
-        'title': 'Crying floor',
-        'text': 'fantasy is end',
-        'author': 3
-    }
-}
-
 
 @article.route('/', methods=['GET'])
 def article_list():
