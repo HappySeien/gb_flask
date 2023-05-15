@@ -4,11 +4,13 @@
     Article details
 {% endblock %}
 {% block content %}
-    <h1>
-        {{ title }}
-    </h1>
-    <br>
-    {{ text }}
-    <br>
-    {{ author }}
+    <h3>
+        {{ article.title }}
+    </h3>
+    <p>
+    {{ article.text }}
+    </p>
+    <div>Author: {{ article.author.user.first_name }} {{ article.author.user.last_name }} ({{ article.author.id }})</div>
+    <div>Created at: {{ article.created_at }}</div>
+    <div>Updated at: {{ article.updated_at }}</div>
 {% endblock %}
