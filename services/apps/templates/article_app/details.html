@@ -13,4 +13,12 @@
     <div>Author: {{ article.author.user.first_name }} {{ article.author.user.last_name }} ({{ article.author.id }})</div>
     <div>Created at: {{ article.created_at }}</div>
     <div>Updated at: {{ article.updated_at }}</div>
+    {% if article.tags %}
+        <div>Tags:</div>
+        <ul>
+            {% for tag in article.tags %}
+                <li>{{ tag.name }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
 {% endblock %}
