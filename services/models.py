@@ -47,6 +47,10 @@ class Author(db.Model):
     user = relationship('User', back_populates='author')
     articles = relationship('Article', back_populates='author')
 
+    def __str__(self):
+        return self.user.username
+    
+
 
 article_tag_association_table = Table(
     'article_tag_association',
@@ -69,6 +73,9 @@ class Article(db.Model):
     author = relationship('Author', back_populates='articles')
     tags = relationship('Tag', secondary=article_tag_association_table, back_populates='articles')
 
+    def __str__(self):
+        return self.title
+    
 
 class Tag(db.Model):
     __tablename__ = 'tags'
@@ -77,3 +84,7 @@ class Tag(db.Model):
     name = db.Column(db.String(32), nullable=False, default='', server_default='')
     
     articles = relationship('Article', secondary=article_tag_association_table, back_populates='tags')
+
+    def __str__(self):
+        return self.name
+    
