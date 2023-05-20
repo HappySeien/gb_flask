@@ -1,5 +1,5 @@
 from flask_login import UserMixin
-from sqlalchemy import ForeignKey
+from sqlalchemy import ForeignKey, Table
 from sqlalchemy.orm import relationship
 from datetime import datetime
 
@@ -48,6 +48,14 @@ class Author(db.Model):
     articles = relationship('Article', back_populates='author')
 
 
+article_tag_association_table = Table(
+    'article_tag_association',
+    db.metadata,
+    db.Column('article_id', db.Integer, ForeignKey('articles.id'), nullable=False),
+    db.Column('tag_id', db.Integer, ForeignKey('tags.id'), nullable=False),
+)
+
+
 class Article(db.Model):
     __tablename__ = 'articles'
 
@@ -59,3 +67,13 @@ class Article(db.Model):
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
     author = relationship('Author', back_populates='articles')
+    tags = relationship('Tag', secondary=article_tag_association_table, back_populates='articles')
+
+
+class Tag(db.Model):
+    __tablename__ = 'tags'
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(32), nullable=False, default='', server_default='')
+    
+    articles = relationship('Article', secondary=article_tag_association_table, back_populates='tags')
