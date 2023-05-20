@@ -3,7 +3,7 @@ from flask_migrate import Migrate
 
 from .settings import Config
 from .apps import VIEWS
-from .extension import db, login_manager, flask_bcrypt_
+from .extension import db, login_manager, flask_bcrypt_, admin
 from .models import User
 from .commands import custom_cli
 
@@ -14,6 +14,7 @@ def create_app() -> Flask:
     register_extensions(app)
     register_blueprints(app)
     register_custom_commands(app)
+    register_admin_panel(app)
     return app
 
 
@@ -38,3 +39,13 @@ def register_blueprints(app: Flask):
 
 def register_custom_commands(app: Flask):
     app.cli.add_command(custom_cli)
+
+
+def register_admin_panel(app):
+    from services import models
+    from services.apps.admin_app.views import TagAdminView, UserAdminView, ArticleAdminView
+    admin.init_app(app)
+
+    admin.add_view(ArticleAdminView(models.Article, db.session, category='Models'))
+    admin.add_view(TagAdminView(models.Tag, db.session, category='Models'))
+    admin.add_view(UserAdminView(models.User, db.session, category='Models'))

@@ -22,6 +22,8 @@ class Config:
 
     WTF_CSRF_ENABLED = True
 
+    FLASK_ADMIN_SWATCH = 'cosmo'
+
     # THREADS_PER_PAGE = 8
 
     # WTF_CSRF_ENABLED = True
