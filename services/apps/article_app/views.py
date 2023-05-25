@@ -8,7 +8,7 @@ from services.extension import db
 from services.models import Article, Author, Tag
 from services.forms import CreateArticleForm
 
-article = Blueprint('article', __name__, url_prefix='/article')
+article = Blueprint('article', __name__, url_prefix='/articles')
 
 
 @article.route('/', methods=['GET'])
