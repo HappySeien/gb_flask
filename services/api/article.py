@@ -19,6 +19,7 @@ class ArticleDetailEvent(EventsResource):
 
 
 class ArticleList(ResourceList):
+    events = ArticleListEvent
     schema = ArticleSchema
     data_layer = {
         'session': db.session,
@@ -27,6 +28,7 @@ class ArticleList(ResourceList):
 
 
 class ArticleDetail(ResourceDetail):
+    events = ArticleDetailEvent
     schema = ArticleSchema
     data_layer = {
         'session': db.session,

@@ -1,4 +1,6 @@
 from flask import Flask
+from flask import g
+from time import time
 from flask_migrate import Migrate
 
 from combojsonapi.event import EventPlugin
@@ -15,6 +17,26 @@ from .commands import custom_cli
 def create_app() -> Flask:
     app = Flask(__name__, template_folder='apps/templates', static_folder='apps/static')
     app.config.from_object(Config)
+
+
+    @app.before_request
+    def process_before_request():
+        """
+        Sets start_time to `g` object
+        """
+        g.start_time = time()
+
+
+    @app.after_request
+    def process_after_request(response):
+        """
+        adds process time in headers
+        """
+        if hasattr(g, "start_time"):
+            response.headers["process-time"] = time() - g.start_time
+        return response
+
+
     register_extensions(app)
     register_blueprints(app)
     register_custom_commands(app)

@@ -1,12 +1,8 @@
 from flask import Blueprint
-from services.api.tag import TagList
-from services.api.tag import TagDetail
-from services.api.user import UserList
-from services.api.user import UserDetail
-from services.api.author import AuthorList
-from services.api.author import AuthorDetail
-from services.api.article import ArticleList
-from services.api.article import ArticleDetail
+from services.api.tag import TagList, TagDetail
+from services.api.user import UserList, UserDetail
+from services.api.author import AuthorList, AuthorDetail
+from services.api.article import ArticleList, ArticleDetail
 from services.extension import api, csrf
 
 api_blueprint = Blueprint('api', __name__)
