@@ -24,12 +24,8 @@ class Config:
 
     FLASK_ADMIN_SWATCH = 'cosmo'
 
-    # THREADS_PER_PAGE = 8
-
-    # WTF_CSRF_ENABLED = True
-    # WTF_CSRF_SECRET_KEY = os.getenv('WTF_CSRF_SECRET_KEY')
-
-    # RECAPTCHA_USE_SSL = False
-    # RECAPTCHA_PUBLIC_KEY = 'B?E(G+KbPeShVmYq3t6w9z$C&F)J@McQfTjWnZr4u7x!A%D*G-KaPdRgUkXp2s5v'
-    # RECAPTCHA_PRIVATE_KEY = os.getenv('RECAPTCHA_PRIVATE_KEY')
-    # RECAPTCHA_OPTIONS = {'theme': 'white'}
+    OPENAPI_URL_PREFIX = '/api/docs'
+    OPENAPI_VERSION = '3.0.0'
+    OPENAPI_SWAGGER_UI_PATH = '/'
+    OPENAPI_SWAGGER_UI_VERSION = '3.51.1'
+    
